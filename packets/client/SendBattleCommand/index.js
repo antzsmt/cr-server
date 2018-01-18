@@ -46,7 +46,6 @@ module.exports.callback = (session, data) => {
     for (let command of data.commands) {
         if (command.type === 1) {
             session.battle.commands.push(command)
-            clients[session.battle.rival].battle.commands.push(command)
         }
     }
 }

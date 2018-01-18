@@ -69,11 +69,19 @@ server.on('connection', client => {
     })
 })
 
-server.on('listening', () => console.log('[SERVER]', chalk.green('Listening on 9339')))
+server.once('listening', () => console.log('[SERVER]', chalk.green('Listening on 9339')))
 server.listen(9339)
 
 process.on('unhandledRejection', (reason, p) => {
     console.log('Unhandled Rejection at: Promise')
     console.log(p)
     console.log(' => reason:', reason)
+})
+
+process.once('SIGINT', () => {
+    process.kill(process.pid, 'SIGKILL')
+})
+
+process.once('SIGUSR2', function () {
+    process.kill(process.pid, 'SIGKILL')
 })

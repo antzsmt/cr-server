@@ -3,10 +3,8 @@ const towers = require('../../../logic/battles/towers.json')
 
 module.exports.code = 21903
 
-module.exports.encode = (player1tmp, player2tmp) => {
+module.exports.encode = (player1, player2) => {
     // TO DO
-    let player1 = player1tmp.tag < player2tmp.tag ? player1tmp : player2tmp
-    let player2 = player1tmp.tag < player2tmp.tag ? player2tmp : player1tmp
     let buffer = ByteBuffer.allocate(500)
     buffer.writeByte(0) // UNCOMPRESSED
     buffer.append('2a02', 'hex')

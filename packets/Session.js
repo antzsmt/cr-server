@@ -1,4 +1,4 @@
-const Crypto = require('../crypto')
+const Crypto = require('../services/network/crypto')
 
 function Session(client) {
     this.client = client

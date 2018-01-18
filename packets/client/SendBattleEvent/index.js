@@ -19,6 +19,6 @@ module.exports.decode = payload => {
     return json
 }
 
-module.exports.callback = (session, data) => {
-    clients[session.battle.rival].send(packets.BattleEvent.code, packets.BattleEvent.encode(data))
+module.exports.callback = (session, event) => {
+    session.battle.sendEvent(event, session.user.tag)
 }
