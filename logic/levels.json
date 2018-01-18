@@ -1,0 +1,41 @@
+[
+    {
+        "requiredExp": 0
+    },
+    {
+        "requiredExp": 20
+    },
+    {
+        "requiredExp": 50
+    },
+    {
+        "requiredExp": 100
+    },
+    {
+        "requiredExp": 200
+    },
+    {
+        "requiredExp": 400
+    },
+    {
+        "requiredExp": 1000
+    },
+    {
+        "requiredExp": 2000
+    },
+    {
+        "requiredExp": 5000
+    },
+    {
+        "requiredExp": 10000
+    },
+    {
+        "requiredExp": 30000
+    },
+    {
+        "requiredExp": 40000
+    },
+    {
+        "requiredExp": 80000
+    }
+]

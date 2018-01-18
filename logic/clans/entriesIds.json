@@ -1,0 +1,10 @@
+{
+    "MESSAGE": 2,
+    "MEMBER_ACTION": {
+        "code": 4,
+        "KICK": 1,
+        "ACCEPTED": 2,
+        "JOINED": 3,
+        "LEFT": 4
+    }
+}

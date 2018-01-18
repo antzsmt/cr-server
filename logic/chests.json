@@ -1,0 +1,112 @@
+{
+    "ids": {
+        "quests": {},
+        "special": {
+            "legendary": 114
+        },
+        "arenas": {
+            "9": {
+                "giant": 185,
+                "supermagical": 186,
+                "magical": 189
+            }
+        }
+    },
+    "rewards": {
+        "114": {
+            "gold": 0,
+            "price": 500,
+            "gems": 0,
+            "cards": {
+                "common": 0,
+                "epic": 0,
+                "rare": 0,
+                "legendaryChance": 1
+            },
+            "schemas": []
+        },
+        "185": {
+            "gold": 735,
+            "price": 460,
+            "gems": 0,
+            "cards": {
+                "common": 194,
+                "rare": 49,
+                "epicChance": 0.3,
+                "legendaryChance": 0.05
+            },
+            "schemas": [
+                [0, 0, 1],
+                [0, 1, 0],
+                [0, 1, 1],
+                [0, 1]
+            ]
+        },
+        "186": {
+            "gold": 5670,
+            "price": 4300,
+            "gems": 0,
+            "cards": {
+                "common": 483,
+                "epic": 21,
+                "rare": 126,
+                "legendaryChance": 0.3
+            },
+            "schemas": [
+                [0, 1, 0, 0, 1, 2, 2],
+                [0, 0, 2, 1, 1, 2],
+                [0, 1, 0, 1, 2, 2],
+                [0, 1, 0, 2, 2],
+                [1, 0, 0, 2, 1]
+            ]
+        },
+        "189": {
+            "gold": 1050,
+            "price": 770,
+            "gems": 0,
+            "cards": {
+                "common": 81,
+                "epic": 3,
+                "rare": 21,
+                "legendaryChance": 0.1
+            },
+            "schemas": [
+                [0, 0, 2, 1, 1, 2],
+                [1, 0, 0, 1, 2],
+                [1, 0, 2, 0, 1]
+            ]
+        },
+        "225": {
+            "gold": 6642,
+            "gems": 0,
+            "cards": {
+                "common": 567,
+                "epic": 24,
+                "rare": 147,
+                "legendaryChance": 0.6
+            },
+            "schemas": [
+                [0, 1, 0, 0, 1, 2, 2],
+                [0, 0, 2, 1, 1, 2],
+                [0, 1, 0, 1, 2, 2],
+                [0, 1, 0, 2, 2],
+                [1, 0, 0, 2, 1]
+            ]
+        },
+        "243": {
+            "gold": 6642,
+            "gems": 0,
+            "draft": true,
+            "cards": {
+                "common": 567,
+                "epic": 24,
+                "rare": 147,
+                "legendaryChance": 0.8
+            },
+            "schemas": [
+                [0, 1, 0, 2],
+                [0, 0, 2, 1]
+            ]
+        }
+    }
+}

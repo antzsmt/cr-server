@@ -1,0 +1,16 @@
+{
+    "gold": [{
+            "quantity": 1000,
+            "price": 60
+        },
+        {
+            "quantity": 10000,
+            "price": 500
+        },
+        {
+            "quantity": 100000,
+            "price": 4500
+        }
+    ]
+
+}

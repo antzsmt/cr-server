@@ -1,0 +1,5 @@
+{
+    "OPEN": 1,
+    "INVITATION": 2,
+    "CLOSED": 3
+}

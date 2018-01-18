@@ -1,0 +1,1 @@
+module.exports = (session, cmd) => session.send(packets.ServerCommands.code, packets.ServerCommands.encode(session, cmd))

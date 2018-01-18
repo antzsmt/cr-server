@@ -1,0 +1,203 @@
+{
+    "common": [{
+            "requiredCards": 1,
+            "upgradePrice": 0,
+            "exp": 4
+        },
+        {
+            "requiredCards": 2,
+            "upgradePrice": 5,
+            "exp": 4
+        },
+        {
+            "requiredCards": 4,
+            "upgradePrice": 20,
+            "exp": 5
+        },
+        {
+            "requiredCards": 10,
+            "upgradePrice": 50,
+            "exp": 6
+        },
+        {
+            "requiredCards": 20,
+            "upgradePrice": 150,
+            "exp": 10
+        },
+        {
+            "requiredCards": 50,
+            "upgradePrice": 400,
+            "exp": 25
+        },
+        {
+            "requiredCards": 100,
+            "upgradePrice": 1000,
+            "exp": 50
+        },
+        {
+            "requiredCards": 200,
+            "upgradePrice": 2000,
+            "exp": 100
+        },
+        {
+            "requiredCards": 400,
+            "upgradePrice": 4000,
+            "exp": 200
+        },
+        {
+            "requiredCards": 800,
+            "upgradePrice": 8000,
+            "exp": 400
+        },
+        {
+            "requiredCards": 1000,
+            "upgradePrice": 20000,
+            "exp": 600
+        },
+        {
+            "requiredCards": 2000,
+            "upgradePrice": 50000,
+            "exp": 800
+        },
+        {
+            "requiredCards": 5000,
+            "upgradePrice": 100000,
+            "exp": 1600
+        },
+        {
+            "max": true
+        }
+    ],
+    "rare": [{
+            "requiredCards": 1,
+            "upgradePrice": 0,
+            "exp": 0
+        },
+        {
+            "requiredCards": 2,
+            "upgradePrice": 50,
+            "exp": 6
+        },
+        {
+            "requiredCards": 4,
+            "upgradePrice": 150,
+            "exp": 10
+        },
+        {
+            "requiredCards": 10,
+            "upgradePrice": 400,
+            "exp": 25
+        },
+        {
+            "requiredCards": 20,
+            "upgradePrice": 1000,
+            "exp": 50
+        },
+        {
+            "requiredCards": 50,
+            "upgradePrice": 2000,
+            "exp": 100
+        },
+        {
+            "requiredCards": 100,
+            "upgradePrice": 4000,
+            "exp": 200
+        },
+        {
+            "requiredCards": 200,
+            "upgradePrice": 8000,
+            "exp": 400
+        },
+        {
+            "requiredCards": 400,
+            "upgradePrice": 20000,
+            "exp": 600
+        },
+        {
+            "requiredCards": 800,
+            "upgradePrice": 50000,
+            "exp": 800
+        },
+        {
+            "requiredCards": 1000,
+            "upgradePrice": 100000,
+            "exp": 1600
+        },
+        {
+            "max": true
+        }
+    ],
+    "epic": [{
+            "requiredCards": 1,
+            "upgradePrice": 0,
+            "exp": 0
+        },
+        {
+            "requiredCards": 2,
+            "upgradePrice": 400,
+            "exp": 25
+        },
+        {
+            "requiredCards": 4,
+            "upgradePrice": 2000,
+            "exp": 100
+        },
+        {
+            "requiredCards": 10,
+            "upgradePrice": 4000,
+            "exp": 200
+        },
+        {
+            "requiredCards": 20,
+            "upgradePrice": 8000,
+            "exp": 4600
+        },
+        {
+            "requiredCards": 50,
+            "upgradePrice": 20000,
+            "exp": 600
+        },
+        {
+            "requiredCards": 100,
+            "upgradePrice": 50000,
+            "exp": 800
+        },
+        {
+            "requiredCards": 200,
+            "upgradePrice": 100000,
+            "exp": 1600
+        },
+        {
+            "max": true
+        }
+    ],
+    "legendary": [{
+            "requiredCards": 1,
+            "upgradePrice": 0,
+            "exp": 0
+        },
+        {
+            "requiredCards": 2,
+            "upgradePrice": 5000,
+            "exp": 250
+        },
+        {
+            "requiredCards": 4,
+            "upgradePrice": 20000,
+            "exp": 600
+        },
+        {
+            "requiredCards": 10,
+            "upgradePrice": 50000,
+            "exp": 800
+        },
+        {
+            "requiredCards": 20,
+            "upgradePrice": 100000,
+            "exp": 1600
+        },
+        {
+            "max": true
+        }
+    ]
+}
