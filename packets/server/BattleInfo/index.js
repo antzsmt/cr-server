@@ -76,10 +76,27 @@ module.exports.encode = (player1, player2) => {
     buffer.writeByte(0)
     buffer.writeRrsInt32(towers.hp[player2.stats.level].left)
     buffer.writeByte(0)
-    buffer.writeRrsInt32(towers.hp[player1.stats.level].king)
-    buffer.writeByte(0)
     buffer.writeRrsInt32(towers.hp[player2.stats.level].king)
-    buffer.append('0000000000000000a401a4010000000000000000a401a4010000000000000000a401a4010000000000000000a401a4010000000000000000a401a4010000000000000000a401a40100ff0102060a0397010108000306280406072e0100fe032001020124042b01360133008e01019801010000050602020402010300000000000000000c000000add9a79d0300', 'hex')
+    buffer.writeByte(0)
+    buffer.writeRrsInt32(towers.hp[player1.stats.level].king)
+    buffer.append('0000000000000000a401a4010000000000000000a401a4010000000000000000a401a4010000000000000000a401a4010000000000000000a401a4010000000000000000a401a401', 'hex')
+    buffer.writeByte(0)
+    buffer.writeByte(-1)
+    buffer.writeByte(1)
+    for(let card of player1.decks[player1.resources.currentDeck].cards){
+        buffer.writeRrsInt32(parseInt(card))
+        buffer.writeRrsInt32(player1.cards[card][0] - 1) // LEVEL
+    }
+
+    buffer.writeByte(0)
+    buffer.writeByte(-2)
+    buffer.writeByte(3)
+    for(let card of player2.decks[player2.resources.currentDeck].cards){
+        buffer.writeRrsInt32(parseInt(card))
+        buffer.writeRrsInt32(player2.cards[card][0] - 1) // LEVEL
+    }
+    
+    buffer.append('0000050602020402010300000000000000000c000000add9a79d0300', 'hex')
 
     return buffer.buffer.slice(0, buffer.offset)
 }

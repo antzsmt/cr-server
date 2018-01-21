@@ -80,13 +80,16 @@ module.exports.encode = (session, cmd) => {
     } else {
         buffer.writeRrsInt32(cmd.id)
         switch (cmd.id) {
+            case 201:
+                buffer.writeIString(cmd.params.name)
+                buffer.writeInt32(1)
+                break
             case 205:
                 buffer.writeInt32(cmd.params.id.high)
                 buffer.writeInt32(cmd.params.id.low)
                 buffer.writeByte(0)
                 buffer.writeByte(0)
                 break
-
             case 206:
                 buffer.writeInt32(cmd.params.id.high)
                 buffer.writeInt32(cmd.params.id.low)

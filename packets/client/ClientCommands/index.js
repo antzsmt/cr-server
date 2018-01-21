@@ -7,7 +7,7 @@ const handlers = {
     504: require('./handlers/upgradeCard'),
     516: require('./handlers/openChest'),
     517: require('./handlers/buyShopGold'),
-    548: require('./handlers/startBattle')
+    525: require('./handlers/startBattle')
 }
 const commands = {}
 const commandsIds = {
@@ -17,7 +17,8 @@ const commandsIds = {
     504: 'upgradeCard',
     516: 'openShopChest',
     517: 'buyShopGold',
-    548: 'startBattle',
+    525: 'startBattle',
+    548: 'unknown2',
     557: 'unknown'
 }
 
@@ -118,6 +119,18 @@ commands.unknown = buf => {
     buf.readByte()
     buf.readByte()
     buf.readRrsInt32()
+    buf.readByte()
+    buf.readByte()
+
+    return false
+}
+
+commands.unknown2 = buf => {
+    buf.readRrsInt32()
+    buf.readRrsInt32()
+    buf.readByte()
+    buf.readByte()
+    buf.readByte()
     buf.readByte()
     buf.readByte()
 

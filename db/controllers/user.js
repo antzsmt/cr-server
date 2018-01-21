@@ -106,3 +106,9 @@ module.exports.changeDeckCard = (user, card, slot) => {
     
     user.save()
 }
+
+module.exports.changeNick = (user, nick) => {
+    user.nick = nick
+
+    user.save()
+}

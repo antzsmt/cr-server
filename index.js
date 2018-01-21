@@ -77,11 +77,3 @@ process.on('unhandledRejection', (reason, p) => {
     console.log(p)
     console.log(' => reason:', reason)
 })
-
-process.once('SIGINT', () => {
-    process.kill(process.pid, 'SIGKILL')
-})
-
-process.once('SIGUSR2', function () {
-    process.kill(process.pid, 'SIGKILL')
-})

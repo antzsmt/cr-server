@@ -1,4 +1,7 @@
 ## Clash Royale Server
+![clash royale](https://img.shields.io/badge/Clash%20Royale-2.0.1-brightgreen.svg?style=flat")
+
+
 WIP
 
 ## Running
@@ -15,6 +18,7 @@ WIP
    - Update settings
 - Battles
    - Troop placement
+   - Training battles
 - Cards
    - Decks
    - Cards upgrading
@@ -24,6 +28,7 @@ WIP
 - Other
    - Levels
    - Gold
+   - Name changing
 
 **NOTE:** This version is not ready to run on a production enviroment.
 

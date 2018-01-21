@@ -30,7 +30,7 @@ const schema = new mongoose.Schema({
         battles: { type: Number, default: 0 },
         wins: { type: Number, default: 0 },
         loses: { type: Number, default: 0 },
-        level: { type: Number, default: 3, max: 13, min: 1 },
+        level: { type: Number, default: 4, max: 13, min: 1 },
         exp: { type: Number, default: 0 },
     },
     clan: {
