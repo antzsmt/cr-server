@@ -88,10 +88,10 @@ module.exports.encode = user => {
 
     // CHESTS
     for (let i = 0; i < user.chests.length; i++) {
-        if (i === 0) buffer.writeByte(1)
+        if (i === 0) buffer.writeByte(user.chests[i].slot)
         else buffer.writeByte(8)
 
-        buffer.writeByte(19)
+        buffer.writeByte(19) // CHEST SCID
         buffer.writeRrsInt32(user.chests[i].id)
         buffer.writeByte(user.chests[i].status)
         if (user.chests[i].status === 8) {
@@ -100,7 +100,7 @@ module.exports.encode = user => {
             buffer.writeRrsInt32(10000)
             buffer.writeRrsInt32((Date.now() / 1000 | 0) + 120)
         }
-        buffer.writeRrsInt32(user.chests[i].slot)
+        buffer.writeRrsInt32(user.chests[i].slot) // ID
         buffer.writeByte(1)
         buffer.writeByte(user.chests[i].slot)
         buffer.writeByte(0)
