@@ -85,24 +85,27 @@ module.exports.encode = user => {
 
     buffer.writeByte(0)
     buffer.writeByte(4)
-
+    
     // CHESTS
     for (let i = 0; i < user.chests.length; i++) {
-        if (i === 0) buffer.writeByte(user.chests[i].slot)
-        else buffer.writeByte(8)
+        let chest = user.chests[i]
+        if (i === 0)
+            buffer.writeByte(1 << chest.slot - 1)
+        else
+            buffer.writeByte(8 << (chest.slot-user.chests[i-1].slot-1))
 
         buffer.writeByte(19) // CHEST SCID
-        buffer.writeRrsInt32(user.chests[i].id)
-        buffer.writeByte(user.chests[i].status)
-        if (user.chests[i].status === 8) {
+        buffer.writeRrsInt32(chest.id)
+        buffer.writeByte(chest.status)
+        if (chest.status === 8) {
             //OPENING CHEST
             buffer.writeRrsInt32(80400)
             buffer.writeRrsInt32(10000)
             buffer.writeRrsInt32((Date.now() / 1000 | 0) + 120)
         }
-        buffer.writeRrsInt32(user.chests[i].slot) // ID
+        buffer.writeRrsInt32(chest.slot) // ID
         buffer.writeByte(1)
-        buffer.writeByte(user.chests[i].slot)
+        buffer.writeByte(chest.slot - 1)
         buffer.writeByte(0)
         buffer.writeByte(0)
     }
