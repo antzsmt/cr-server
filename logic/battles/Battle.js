@@ -1,3 +1,4 @@
+
 class Battle {
     constructor(sessions){
         this.hearBeatId = 1
@@ -5,7 +6,7 @@ class Battle {
         this.players = sessions
         setTimeout(() => {
             this.finish()
-        }, 30000)
+        }, 60000)
     }
 
     start() {

@@ -13,18 +13,18 @@ module.exports.encode = user => {
 
     // DECK
     for (let i = 0; i <= 7; i++) {
-        buffer.writeRrsInt32(user.decks[0][i]) // CARD ID
-        buffer.writeRrsInt32(user.cards[user.decks[0][i]][0]) // LEVEL
+        let card = user.decks[0].cards[i]
+        buffer.writeRrsInt32(card) // CARD ID
+        buffer.writeRrsInt32(user.cards[card][0]) // LEVEL
         buffer.writeRrsInt32(0)
-        buffer.writeRrsInt32(user.cards[user.decks[0][i]][1]) // COUNT
-        buffer.writeRrsInt32(0)
+        buffer.writeRrsInt32(user.cards[card][1]) // COUNT
         buffer.writeRrsInt32(0)
         buffer.writeRrsInt32(0)
         buffer.writeRrsInt32(0)
       }
 
-    buffer.writeInt32(user.id.high)
-    buffer.writeInt32(user.id.low)
+    buffer.writeInt32(user.tagId.high)
+    buffer.writeInt32(user.tagId.low)
 
     buffer.writeByte(0) // IF 1 => C. (RRSINT-RRSINT)
 
@@ -34,15 +34,15 @@ module.exports.encode = user => {
     buffer.writeByte(0)
 
     for (let i = 0; i < 3; i++) {
-        buffer.writeRrsInt32(user.id.high)
-        buffer.writeRrsInt32(user.id.low)
+        buffer.writeRrsInt32(user.tagId.high)
+        buffer.writeRrsInt32(user.tagId.low)
     }
 
     buffer.writeIString(user.nick)
     buffer.writeByte(0) // NAME CHANGED
 
-    buffer.writeRrsInt32(user.arena + 1)
-    buffer.writeRrsInt32(user.trophies)
+    buffer.writeRrsInt32(user.stats.arena + 1)
+    buffer.writeRrsInt32(user.stats.trophies)
     buffer.writeRrsInt32(235) // UNKNOWN
     buffer.writeRrsInt32(2380)
     buffer.writeRrsInt32(0) // LEGEND TROPHIES
@@ -66,7 +66,7 @@ module.exports.encode = user => {
 
     buffer.writeByte(5)
     buffer.writeByte(1)
-    buffer.writeRrsInt32(user.gold)
+    buffer.writeRrsInt32(user.resources.gold)
 
     buffer.writeByte(5)
     buffer.writeByte(2)
@@ -82,7 +82,7 @@ module.exports.encode = user => {
 
     buffer.writeByte(5)
     buffer.writeByte(5)
-    buffer.writeRrsInt32(user.gold)
+    buffer.writeRrsInt32(user.resources.gold)
 
     buffer.writeByte(5)
     buffer.writeByte(12)
@@ -136,7 +136,7 @@ module.exports.encode = user => {
 
     buffer.writeByte(5)
     buffer.writeByte(6)
-    buffer.writeRrsInt32(user.record) // U. Record
+    buffer.writeRrsInt32(user.stats.record) // U. Record
 
     buffer.writeByte(5)
     buffer.writeByte(7)
@@ -174,19 +174,19 @@ module.exports.encode = user => {
     buffer.writeByte(0) // IF 1 => C. (RRSINT-BYTE-BYTE)
     buffer.writeByte(0)
 
-    buffer.writeRrsInt32(user.gems)
-    buffer.writeRrsInt32(user.gems)
-    buffer.writeRrsInt32(user.experience)
-    buffer.writeRrsInt32(user.level)
+    buffer.writeRrsInt32(user.resources.gems)
+    buffer.writeRrsInt32(user.resources.gems)
+    buffer.writeRrsInt32(user.stats.exp)
+    buffer.writeRrsInt32(user.stats.level)
     buffer.writeRrsInt32(0)
 
-    buffer.writeByte(user.clan ? 9 : 1) // HAS CLAN ? 9 : Yes, 1: No
-    if (user.clan) {
-        let tag = tag2id.tag2id(user.clan[1])
+    buffer.writeByte(user.clan.tag ? 9 : 1) // HAS CLAN ? 9 : Yes, 1: No
+    if (user.clan.tag) {
+        let tag = tag2id.tag2id(user.clan.tag)
         buffer.writeRrsInt32(tag.high)
         buffer.writeRrsInt32(tag.low) // CLAN ID
-        buffer.writeIString(user.clan[0]) //CLAN NAME
-        buffer.writeRrsInt32(user.clan[2]) // CLAN BADGE
+        buffer.writeIString(user.clan.name) //CLAN NAME
+        buffer.writeRrsInt32(user.clan.badge) // CLAN BADGE
         buffer.writeByte(2) // PLAYER ROLE
     }
 
@@ -197,7 +197,7 @@ module.exports.encode = user => {
 
     buffer.writeRrsInt32(193) // WINS
     buffer.writeRrsInt32(128) // LOSES
-    buffer.append('00', 'hex')
+    buffer.append('7f90023c00000002099e94960c099e94960c099e94960c000000007f0100000000000000000027000000000008090501a9010502010503010505a901050d00050e0005108e09051d8888d54405260000033c07063c08063c09060002050806050b27041a00011a01011a03021a0d010000a401a4010001000000000000000001000000010000', 'hex')
 
     return buffer.buffer.slice(0, buffer.offset)
 }
