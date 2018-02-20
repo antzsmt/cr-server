@@ -40,6 +40,8 @@ const schema = new mongoose.Schema({
         role: { type: Number, min: 1, max: 4}
     },
     registeredTime: { type: Date, default: Date.now }
+}, {
+    usePushEach: true
 })
 
 schema.post('validate', (doc, next) => {

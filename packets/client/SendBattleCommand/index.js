@@ -1,5 +1,6 @@
 const ByteBuffer = require('../../../services/network/bytebuffer-sc')
 const cards = require('../../../logic/cards')
+const battles = require('../../../protocol/battles')
 
 module.exports.code = 12904
 
@@ -42,10 +43,4 @@ module.exports.decode = payload => {
     return json
 }
 
-module.exports.callback = (session, data) => {
-    for (let command of data.commands) {
-        if (command.type === 1) {
-            session.battle.commands.push(command)
-        }
-    }
-}
+module.exports.callback = battles.command

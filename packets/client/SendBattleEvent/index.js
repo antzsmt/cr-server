@@ -1,4 +1,5 @@
 const ByteBuffer = require('../../../services/network/bytebuffer-sc')
+const battles = require('../../../protocol/battles')
 
 module.exports.code = 12951
 
@@ -19,6 +20,4 @@ module.exports.decode = payload => {
     return json
 }
 
-module.exports.callback = (session, event) => {
-    session.battle.sendEvent(event, session.user.tag)
-}
+module.exports.callback = battles.event

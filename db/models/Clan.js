@@ -21,7 +21,9 @@ const schema = new mongoose.Schema({
         badge: { type: Number, default: 55 }
     },
     chat: [{ type: Array }]
-})
+}, {
+        usePushEach: true
+    })
 
 schema.post('validate', (doc, next) => {
     doc.tagId = tag2id.tag2id(doc.tag)
