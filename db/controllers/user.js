@@ -83,7 +83,7 @@ module.exports.joinClan = (user, clan) => {
     user.clan.tag = clan.tag
     user.clan.name = clan.name
     user.clan.badge = clan.info.badge
-    user.clan.role = clanRoles.member
+    user.clan.role = clanRoles.member.id
 
     user.save()
 }
@@ -109,6 +109,12 @@ module.exports.changeDeckCard = (user, card, slot) => {
 
 module.exports.changeNick = (user, nick) => {
     user.nick = nick
+
+    user.save()
+}
+
+module.exports.changeRole = (user, role) => {
+    user.clan.role = role
 
     user.save()
 }

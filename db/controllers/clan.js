@@ -41,7 +41,7 @@ module.exports.addMember = async (clan, member) => {
     clan.memberCount += 1
     clan.members[member.tag] = [member.nick, member.stats.trophies, 0, 1, member.stats.level]
     clan.markModified('members')
-    clan.chat.push([events.MEMBER_ACTION.code, events.MEMBER_ACTION.JOINED, member.tag, member.nick, timestamp()])
+    clan.chat.push([events.MEMBER_ACTION.code, events.MEMBER_ACTION.JOINED, member.nick, timestamp()])
     if (clan.chat.length > 50) clan.chat = clan.chat.slice(1)
     // TODO: Recalcular trophies
 
@@ -74,6 +74,17 @@ module.exports.updateSettings = async (tag, settings) => {
     clan.info.region = settings.region
     clan.info.access = settings.access
     clan.info.requiredTrophies = settings.requiredTrophies
+
+    clan.save()
+}
+
+module.exports.changeRole = async (tag, member, role, promoted, initiator) => {
+    let clan = await db.controllers.clan.findByTag(tag)
+
+    clan.members[member.tag][3] = role
+    clan.markModified('members')
+    clan.chat.push([events.MEMBER_ACTION.code, promoted ? events.MEMBER_ACTION.PROMOTED : events.MEMBER_ACTION.DEMOTED, member.tag, member.nick, timestamp(), initiator.nick])
+    if (clan.chat.length > 50) clan.chat = clan.chat.slice(1)
 
     clan.save()
 }

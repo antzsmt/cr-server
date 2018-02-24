@@ -55,7 +55,7 @@ module.exports.leave = async (session, data) => {
 }
 
 module.exports.updateSettings = (session, settings) => {
-    if(session.user.clan.role !== clanRoles.leader && session.user.clan.role !== clanRoles.coleader) return false
+    if(session.user.clan.role !== clanRoles.leader.id && session.user.clan.role !== clanRoles.coleader.id) return false
     if(settings.description.length > 95) return false
     if(settings.region > 260) return false // TO DO
     if(allowedRequiredTrophies.indexOf(settings.requiredTrophies) === -1) return false
@@ -84,4 +84,25 @@ module.exports.fetch = async (session, tag) => {
 module.exports.searchJoinable = async session => {
     let clans = await db.controllers.clan.findJoinable()
     session.send(packets.JoinableClans.code, packets.JoinableClans.encode(clans))
+}
+
+module.exports.changeRole = async (session, json) => {
+    let avaiableRoles = Object.values(clanRoles).map(role => role.id)
+    let user = await db.controllers.user.find({tag: json.tag})
+
+    if(!user) return false
+    if(avaiableRoles.indexOf(json.role) === -1) return false // Role doesn't exists
+    if(clanRoles[clanRoles[json.role]].order >= clanRoles[clanRoles[session.user.clan.role]].order) return false
+    if(clanRoles[clanRoles[user.clan.role]].order >= clanRoles[clanRoles[session.user.clan.role]].order) return false
+    if(!session.user.clan || !user.clan) return false
+    // todo: promote to leader
+
+    let promoted = clanRoles[clanRoles[json.role]].order > clanRoles[clanRoles[user.clan.role]].order
+
+    db.controllers.user.changeRole(user, json.role)
+    db.controllers.clan.changeRole(session.user.clan.tag, user, json.role, promoted, session.user) 
+    Redis.publisher.publish(
+        'clan:' + session.user.clan.tag,
+        `${promoted ? 'promoted' : 'demoted'}:${user.tag}:${user.nick}:${session.user.nick}`
+    )
 }

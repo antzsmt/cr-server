@@ -7,13 +7,13 @@ module.exports.code = 24113
 module.exports.encode = user => {
     let buffer = ByteBuffer.allocate(2000)
 
+    buffer.writeRrsInt32(8)
     buffer.writeRrsInt32(0)
-    buffer.writeRrsInt32(0)
-    buffer.writeRrsInt32(0)
+    buffer.writeRrsInt32(-128)
 
     // DECK
     for (let i = 0; i <= 7; i++) {
-        let card = user.decks[0].cards[i]
+        let card = user.decks[user.resources.currentDeck].cards[i]
         buffer.writeRrsInt32(card) // CARD ID
         buffer.writeRrsInt32(user.cards[card][0]) // LEVEL
         buffer.writeRrsInt32(0)
@@ -31,7 +31,7 @@ module.exports.encode = user => {
     buffer.writeRrsInt32(0) // SEASONS COUNT
     /* SEASONS COMPONENT */
 
-    buffer.writeByte(0)
+    buffer.writeByte(1)
 
     for (let i = 0; i < 3; i++) {
         buffer.writeRrsInt32(user.tagId.high)
@@ -43,8 +43,8 @@ module.exports.encode = user => {
 
     buffer.writeRrsInt32(user.stats.arena + 1)
     buffer.writeRrsInt32(user.stats.trophies)
-    buffer.writeRrsInt32(235) // UNKNOWN
-    buffer.writeRrsInt32(2380)
+    buffer.writeRrsInt32(0) // UNKNOWN
+    buffer.writeRrsInt32(0)
     buffer.writeRrsInt32(0) // LEGEND TROPHIES
     buffer.writeRrsInt32(0) // SEASON RECORD
     buffer.writeRrsInt32(0)
@@ -62,7 +62,7 @@ module.exports.encode = user => {
     buffer.writeByte(0)
     buffer.writeByte(8)
 
-    buffer.writeRrsInt32(16) // COMPONENT LENGTH
+    buffer.writeRrsInt32(7) // COMPONENT LENGTH
 
     buffer.writeByte(5)
     buffer.writeByte(1)
@@ -70,7 +70,7 @@ module.exports.encode = user => {
 
     buffer.writeByte(5)
     buffer.writeByte(2)
-    buffer.writeRrsInt32(150) // WON CHESTS
+    buffer.writeRrsInt32(0) // WON CHESTS
 
     buffer.writeByte(5)
     buffer.writeByte(3)
@@ -85,48 +85,12 @@ module.exports.encode = user => {
     buffer.writeRrsInt32(user.resources.gold)
 
     buffer.writeByte(5)
-    buffer.writeByte(12)
-    buffer.writeRrsInt32(419) // NEXT SUPERMAGICAL
-
-    buffer.writeByte(5)
     buffer.writeByte(13)
     buffer.writeRrsInt32(0)
 
     buffer.writeByte(5)
-    buffer.writeByte(14)
-    buffer.writeRrsInt32(0) // DAILY REWARDS
-
-    buffer.writeByte(5)
-    buffer.writeByte(15)
-    buffer.writeRrsInt32(0) // NEXT LEGENDARY
-
-    buffer.writeByte(5)
-    buffer.writeByte(16)
-    buffer.writeRrsInt32(1040) // SHOP DAYS
-
-    buffer.writeByte(5)
-    buffer.writeByte(17)
-    buffer.writeRrsInt32(1044) // SHOP LEGENDARY
-
-    buffer.writeByte(5)
-    buffer.writeByte(18)
-    buffer.writeRrsInt32(1043) // SHOP SM
-
-    buffer.writeByte(5)
-    buffer.writeByte(19)
-    buffer.writeRrsInt32(1049) // SHOP ARENA PACK
-
-    buffer.writeByte(5)
-    buffer.writeByte(22)
-    buffer.writeRrsInt32(1042) // SHOP EPIC
-
-    buffer.writeByte(5)
     buffer.writeByte(28)
     buffer.writeByte(0)
-
-    buffer.writeByte(5)
-    buffer.writeByte(29)
-    buffer.writeByte(72000006) // LAST GAME MODE
 
     buffer.writeByte(00)
     buffer.writeRrsInt32(0) // C. LENGTH (BYTE-BYTE-RRSINT32)
@@ -187,16 +151,16 @@ module.exports.encode = user => {
         buffer.writeRrsInt32(tag.low) // CLAN ID
         buffer.writeIString(user.clan.name) //CLAN NAME
         buffer.writeRrsInt32(user.clan.badge) // CLAN BADGE
-        buffer.writeByte(2) // PLAYER ROLE
+        buffer.writeByte(user.clan.role) // PLAYER ROLE
     }
 
 
-    buffer.writeRrsInt32(342) // BATTLES PLAYED
+    buffer.writeRrsInt32(0) // BATTLES PLAYED
     buffer.writeRrsInt32(0) // TOURNEY BATTLES PLAYED
     buffer.writeRrsInt32(0)
 
-    buffer.writeRrsInt32(193) // WINS
-    buffer.writeRrsInt32(128) // LOSES
+    buffer.writeRrsInt32(0) // WINS
+    buffer.writeRrsInt32(0) // LOSES
     buffer.append('7f90023c00000002099e94960c099e94960c099e94960c000000007f0100000000000000000027000000000008090501a9010502010503010505a901050d00050e0005108e09051d8888d54405260000033c07063c08063c09060002050806050b27041a00011a01011a03021a0d010000a401a4010001000000000000000001000000010000', 'hex')
 
     return buffer.buffer.slice(0, buffer.offset)

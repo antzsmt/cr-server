@@ -24,6 +24,32 @@ module.exports = (session, channel, message) => {
                 }
             }))
             break
+        case 'promoted':
+            session.send(packets.ClanEvent.code, packets.ClanEvent.encode({
+                id: events.MEMBER_ACTION.code,
+                actionType: events.MEMBER_ACTION.PROMOTED,
+                player: {
+                    tagId: tag2id.tag2id(command[1]),
+                    nick: command[2]
+                },
+                initiator: {
+                    nick: command[3]
+                }
+            }))
+            break
+        case 'demoted':
+            session.send(packets.ClanEvent.code, packets.ClanEvent.encode({
+                id: events.MEMBER_ACTION.code,
+                actionType: events.MEMBER_ACTION.DEMOTED,
+                player: {
+                    tagId: tag2id.tag2id(command[1]),
+                    nick: command[2]
+                },
+                initiator: {
+                    nick: command[3]
+                }
+            }))
+            break
         case 'msg':
             session.send(packets.ClanEvent.code, packets.ClanEvent.encode({
                 id: events.MESSAGE,

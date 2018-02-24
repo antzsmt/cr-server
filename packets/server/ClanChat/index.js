@@ -28,16 +28,19 @@ module.exports.encode = chat => {
                     name: entry[3],
                     tag: entry[2],
                     role: 1,
-                    time: entry[1]
+                    time: entry[4]
                 })
                 buffer.writeRrsInt32(entry[1])
+                let userId = tag2id.tag2id(entry[2])
+                buffer.writeRrsInt32(userId.high)
+                buffer.writeRrsInt32(userId.low)
                 switch (entry[1]) {
                     case entries.MEMBER_ACTION.JOINED:
                     case entries.MEMBER_ACTION.LEFT:
-                        let userId = tag2id.tag2id(entry[2])
-                        buffer.writeRrsInt32(userId.high)
-                        buffer.writeRrsInt32(userId.low)
                         buffer.writeInt32(0)
+                        break
+                    default:
+                        buffer.writeIString(entry[5])
                         break
                 }
                 break

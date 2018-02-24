@@ -1,6 +1,6 @@
 module.exports = {
     content: {
-        sha: '5e6a71f01d48d13e66e4a98562defe7c118b6fa7',
+        version: '3.691.14',
         host: '192.168.0.16',
         port: '8080'
     },

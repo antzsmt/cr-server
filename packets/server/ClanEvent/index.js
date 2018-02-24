@@ -26,9 +26,16 @@ module.exports.encode = event => {
             buffer.writeRrsInt32(event.actionType)
             switch (event.actionType) {
                 case events.MEMBER_ACTION.JOINED:
+                case events.MEMBER_ACTION.LEFT:
                     buffer.writeRrsInt32(event.player.tagId.high)
                     buffer.writeRrsInt32(event.player.tagId.low)
                     buffer.writeInt32(0)
+                    break
+                default:
+                    buffer.writeRrsInt32(event.player.tagId.high)
+                    buffer.writeRrsInt32(event.player.tagId.low)
+                    buffer.writeIString(event.initiator.nick)
+                    break
             }
             break
         case events.MESSAGE:

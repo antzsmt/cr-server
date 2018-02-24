@@ -1,6 +1,22 @@
 {
-    "member": 1,
-    "leader": 2,
-    "elder": 3,
-    "coleader": 4
+    "member": {
+        "id": 1,
+        "order": 1
+    },
+    "leader": {
+        "id": 2,
+        "order": 4
+    },
+    "elder": {
+        "id": 3,
+        "order": 2
+    },
+    "coleader": {
+        "id": 4,
+        "order": 3
+    },
+    "1": "member",
+    "2": "leader",
+    "3": "elder",
+    "4": "coleader"
 }

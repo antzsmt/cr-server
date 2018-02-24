@@ -5,6 +5,8 @@
         "KICK": 1,
         "ACCEPTED": 2,
         "JOINED": 3,
-        "LEFT": 4
+        "LEFT": 4,
+        "PROMOTED": 5,
+        "DEMOTED": 6
     }
 }

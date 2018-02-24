@@ -1,26 +1,31 @@
 const Redis = require('../services/redis')
 const clanEventHandler = require('../packets/server/ClanEvent/newEventHandler')
+const fingerprintSha = require('../services/http/fingerprint').sha
 
 module.exports.auth = async (session, json) => {
-    let user = json.pass ? await db.controllers.user.find({
-        tag: json.tag,
-        pass: json.pass
-    }) : await db.controllers.user.create()
-    if (user) {
-        session.user = user
-        session.send(packets.LoginOk.code, packets.LoginOk.encode(user))
-        session.send(packets.AccountInfo.code, packets.AccountInfo.encode(user))
-        clients[user.tag] = session
-        if (user.clan.tag) {
-            let clan = await db.controllers.clan.getChat(user.clan.tag)
-            session.send(packets.ClanChat.code, packets.ClanChat.encode(clan.chat))
-
-            session.redis = new Redis.client(config.redis.port, config.redis.host)
-            session.redis.subscribe('clan:' + user.clan.tag)
-            session.redis.on('message', (channel, message) => clanEventHandler.call({}, session, channel, message))
-        }
+    if (json.resourceSha != fingerprintSha) {
+        session.send(packets.LoginFailed.code, packets.LoginFailed.encode('updateContent'), 4)
     } else {
-        session.send(packets.LoginFailed.code, packets.LoginFailed.encode('7')) // TODO
+        let user = json.pass ? await db.controllers.user.find({
+            tag: json.tag,
+            pass: json.pass
+        }) : await db.controllers.user.create()
+        if (user) {
+            session.user = user
+            session.send(packets.LoginOk.code, packets.LoginOk.encode(user))
+            session.send(packets.AccountInfo.code, packets.AccountInfo.encode(user))
+            clients[user.tag] = session
+            if (user.clan.tag) {
+                let clan = await db.controllers.clan.getChat(user.clan.tag)
+                session.send(packets.ClanChat.code, packets.ClanChat.encode(clan.chat))
+
+                session.redis = new Redis.client(config.redis.port, config.redis.host)
+                session.redis.subscribe('clan:' + user.clan.tag)
+                session.redis.on('message', (channel, message) => clanEventHandler.call({}, session, channel, message))
+            }
+        } else {
+            session.send(packets.LoginFailed.code, packets.LoginFailed.encode('7')) // TODO
+        }
     }
 }
 

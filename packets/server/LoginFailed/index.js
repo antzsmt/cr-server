@@ -1,4 +1,4 @@
-const fingerPrint = JSON.stringify(require('../../../services/http/fingerprint.json'))
+const fingerPrint = JSON.stringify(require('../../../services/http/fingerprint'))
 const ByteBuffer = require('../../../services/network/bytebuffer-sc')
 
 module.exports.code = 20103
